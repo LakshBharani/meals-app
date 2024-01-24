@@ -1,8 +1,9 @@
 import { Pressable, StyleSheet, View, Text, Platform } from "react-native";
+import elementShadow from "../constants/ElementShadow";
 
 const CategoryGridTile = ({ title, color, onPress }) => {
   return (
-    <View style={styles.gridItem}>
+    <View style={[styles.gridItem, elementShadow]}>
       <Pressable
         onPress={onPress}
         android_ripple={{ color: "#ccc" }}
@@ -28,12 +29,8 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 8,
     elevation: 4,
-    shadowColor: "black",
-    shadowOpacity: 0.25,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 8,
     backgroundColor: "white",
-    overflow: Platform.OS === "android" ? "hidden" : "visible",
+    overflow: Platform.select({ ios: "visible", android: "hidden" }),
   },
   button: {
     flex: 1,

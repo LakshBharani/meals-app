@@ -1,10 +1,23 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  Platform,
+} from "react-native";
 import React from "react";
+import elementShadow from "../constants/ElementShadow";
 
 const MealItem = ({ title, imageUrl, duration, complexity, affordability }) => {
   return (
-    <View style={styles.mealItem}>
-      <Pressable>
+    <View style={[styles.mealItem, elementShadow]}>
+      <Pressable
+        android_ripple={{ color: "#ccc" }}
+        style={({ pressed }) =>
+          pressed && Platform.OS === "ios" ? styles.buttonPressed : null
+        }
+      >
         <View>
           <Image source={{ uri: imageUrl }} style={styles.image} />
           <Text style={styles.title}>{title}</Text>
@@ -15,7 +28,7 @@ const MealItem = ({ title, imageUrl, duration, complexity, affordability }) => {
           <Text style={styles.detailItem}>{affordability.toUpperCase()}</Text>
         </View>
       </Pressable>
-    </View>
+    </View> 
   );
 };
 
@@ -25,12 +38,15 @@ const styles = StyleSheet.create({
   mealItem: {
     margin: 16,
     borderRadius: 8,
-    overflow: "hidden",
+    overflow: Platform.select({ ios: "visible", android: "hidden" }),
     backgroundColor: "#fff",
+    elevation: 4,
   },
   image: {
     height: 200,
     width: "100% ",
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
   },
   title: {
     fontWeight: "bold",
@@ -41,10 +57,14 @@ const styles = StyleSheet.create({
   details: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
     padding: 8,
   },
   detailItem: {
     marginHorizontal: 4,
     fontSize: 12,
+  },
+  buttonPressed: {
+    opacity: 0.5,
   },
 });
