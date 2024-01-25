@@ -8,11 +8,29 @@ import {
 } from "react-native";
 import React from "react";
 import elementShadow from "../constants/ElementShadow";
+import { useNavigation } from "@react-navigation/native";
+import MealDetails from "./MealDetails";
 
-const MealItem = ({ title, imageUrl, duration, complexity, affordability }) => {
+const MealItem = ({
+  id,
+  title,
+  imageUrl,
+  duration,
+  complexity,
+  affordability,
+}) => {
+  const navigation = useNavigation(); 
+
+  function pressHandler() {
+    navigation.navigate("MealDetails", {
+      mealId: id,
+    });
+  }
+
   return (
     <View style={[styles.mealItem, elementShadow]}>
       <Pressable
+        onPress={pressHandler}
         android_ripple={{ color: "#ccc" }}
         style={({ pressed }) =>
           pressed && Platform.OS === "ios" ? styles.buttonPressed : null
@@ -22,13 +40,13 @@ const MealItem = ({ title, imageUrl, duration, complexity, affordability }) => {
           <Image source={{ uri: imageUrl }} style={styles.image} />
           <Text style={styles.title}>{title}</Text>
         </View>
-        <View style={styles.details}>
-          <Text style={styles.detailItem}>{duration}m</Text>
-          <Text style={styles.detailItem}>{complexity.toUpperCase()}</Text>
-          <Text style={styles.detailItem}>{affordability.toUpperCase()}</Text>
-        </View>
+        <MealDetails
+          duration={duration}
+          complexity={complexity}
+          affordability={affordability}
+        />
       </Pressable>
-    </View> 
+    </View>
   );
 };
 

@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Button } from "react-native";
 import CategoriesScreens from "./screens/CategoriesScreens";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
@@ -17,7 +17,6 @@ export default function App() {
           <Stack.Navigator
             initialRouteName="MealsCategories"
             screenOptions={{
-              headerTitle: "All Categories",
               headerStyle: {
                 backgroundColor: "#351401",
               },
@@ -29,12 +28,23 @@ export default function App() {
             <Stack.Screen
               name="MealsCategories"
               component={CategoriesScreens}
+              options={{
+                headerTitle: "All Categories",
+              }}
             />
             <Stack.Screen
               name="MealsOverview"
               component={MealsOverviewScreen}
             />
-            <Stack.Screen name="MealDetails" component={MealDetailsScreen} />
+            <Stack.Screen
+              name="MealDetails"
+              component={MealDetailsScreen}
+              options={{
+                headerRight: () => {
+                  return <Button onPress={() => {}} title="Tap me" />;
+                },
+              }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </View>

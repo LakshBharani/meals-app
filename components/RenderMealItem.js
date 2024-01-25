@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
+import { View } from "react-native";
 import React from "react";
 import MealItem from "./MealItem";
 
 const RenderMealItem = (itemData) => {
   const mealItemProps = {
+    id: itemData.item.id,
     title: itemData.item.title,
     imageUrl: itemData.item.imageUrl,
     duration: itemData.item.duration,
@@ -19,5 +20,3 @@ const RenderMealItem = (itemData) => {
 };
 
 export default RenderMealItem;
-
-const styles = StyleSheet.create({});
