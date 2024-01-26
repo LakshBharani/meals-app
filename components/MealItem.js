@@ -19,7 +19,7 @@ const MealItem = ({
   complexity,
   affordability,
 }) => {
-  const navigation = useNavigation(); 
+  const navigation = useNavigation();
 
   function pressHandler() {
     navigation.navigate("MealDetails", {
@@ -33,7 +33,7 @@ const MealItem = ({
         onPress={pressHandler}
         android_ripple={{ color: "#ccc" }}
         style={({ pressed }) =>
-          pressed && Platform.OS === "ios" ? styles.buttonPressed : null
+          pressed && Platform.OS === "ios" && styles.buttonPressed
         }
       >
         <View>
