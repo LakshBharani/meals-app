@@ -8,6 +8,8 @@ import MealDetailsScreen from "./screens/MealDetailsScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import FavoritesScreen from "./screens/FavoritesScreen";
 import { Ionicons } from "@expo/vector-icons";
+import { Provider } from "react-redux";
+import store from "./store/redux/store";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -57,42 +59,44 @@ export default function App() {
     <>
       <StatusBar style="light" />
       <View style={styles.screen}>
-        <NavigationContainer>
-          <Stack.Navigator
-            initialRouteName="MealsCategories"
-            screenOptions={{
-              headerStyle: {
-                backgroundColor: "#351401",
-              },
-              contentStyle: { backgroundColor: "#3f2f25" },
-              headerTintColor: "white",
-              headerBackTitle: "Back",
-            }}
-          >
-            <Stack.Screen
-              name="Drawer"
-              component={DrawerNavigator}
-              options={{
-                headerTitle: "All Categories",
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="MealsOverview"
-              component={MealsOverviewScreen}
-            />
-            <Stack.Screen
-              name="MealDetails"
-              component={MealDetailsScreen}
-              options={{
-                headerRight: () => {
-                  return <Button onPress={() => {}} title="Tap me" />;
+        <Provider store={store}>
+          <NavigationContainer>
+            <Stack.Navigator
+              initialRouteName="MealsCategories"
+              screenOptions={{
+                headerStyle: {
+                  backgroundColor: "#351401",
                 },
-                title: "About the Meal",
+                contentStyle: { backgroundColor: "#3f2f25" },
+                headerTintColor: "white",
+                headerBackTitle: "Back",
               }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
+            >
+              <Stack.Screen
+                name="Drawer"
+                component={DrawerNavigator}
+                options={{
+                  headerTitle: "All Categories",
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="MealsOverview"
+                component={MealsOverviewScreen}
+              />
+              <Stack.Screen
+                name="MealDetails"
+                component={MealDetailsScreen}
+                options={{
+                  headerRight: () => {
+                    return <Button onPress={() => {}} title="Tap me" />;
+                  },
+                  title: "About the Meal",
+                }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </Provider>
       </View>
     </>
   );
