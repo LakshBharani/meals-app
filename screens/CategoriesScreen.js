@@ -3,7 +3,7 @@ import { CATEGORIES } from "../data/dummy-data";
 import React from "react";
 import CategoryGridTile from "../components/CategoryGridTile";
 
-const CategoriesScreens = ({ navigation }) => {
+const CategoriesScreen = ({ navigation }) => {
   function renderCategoryItem(itemData) {
     function pressHandler() {
       navigation.navigate("MealsOverview", {
@@ -31,6 +31,6 @@ const CategoriesScreens = ({ navigation }) => {
   );
 };
 
-export default CategoriesScreens;
+export default CategoriesScreen;
 
 const styles = StyleSheet.create({});
